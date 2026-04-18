@@ -4,7 +4,6 @@ A bash + Python installer that splits your KDE Plasma panel into three independe
 
 ![Plasma 6](https://img.shields.io/badge/KDE_Plasma-6.x-blue?logo=kde)
 ![Fedora](https://img.shields.io/badge/Fedora-tested-blue?logo=fedora)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
