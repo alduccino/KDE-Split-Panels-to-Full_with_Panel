@@ -171,22 +171,3 @@ Backups are stored at:
 
 ---
 
-## Technical notes
-
-### Why not `evaluateScript` + `createPanel`?
-
-`createPanel()` is only available during Plasma's startup scripting phase. The `evaluateScript` D-Bus method runs scripts in a runtime JS context where `createPanel` is undefined. This is why `create-panels.py` writes directly to `plasma-org.kde.plasma.desktop-appletsrc` using `kwriteconfig6`.
-
-### Why `loadScript` + `start()`, not just `reconfigure`?
-
-`kwin reconfigure` re-reads `kwinrc` and enqueues newly enabled scripts, but does **not** call `start()`. Without `start()`, the script's JS is never executed — signals never connect, the timer never runs. The installer explicitly calls both `loadScript` and `start()` via D-Bus after writing the plugin flag.
-
-### Why `callDBus('org.kde.PlasmaShell', 'evaluateScript', ...)` (split args)?
-
-The `callDBus()` function in KWin's JS runtime takes `(service, path, interface, method, ...args)` as separate arguments. Passing `'org.kde.PlasmaShell.evaluateScript'` as a single string merges interface and method into a non-existent interface name — KWin drops the call silently.
-
----
-
-## License
-
-MIT
